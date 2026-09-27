@@ -27,7 +27,7 @@ with open("class_names.json", "r") as f:
 
 model = None
 
-def ensure_multimodal_model_loaded():
+def ensure_image_model_loaded():
     global model
 
     if model is not None:
@@ -161,7 +161,7 @@ symptom_feature_columns = []
 condition_names = []
 
 
-def ensure_multimodal_model_loaded():
+def ensure_image_model_loaded():
     global multimodal_model
     global symptom_feature_columns
     global condition_names

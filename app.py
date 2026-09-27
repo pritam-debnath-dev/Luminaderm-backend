@@ -69,7 +69,7 @@ def home():
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     """Existing image-only endpoint."""
-    ensure_multimodal_model_loaded()
+    ensure_image_model_loaded()
     
     try:
         image_bytes = await file.read()
@@ -161,7 +161,7 @@ symptom_feature_columns = []
 condition_names = []
 
 
-def ensure_image_model_loaded():
+def ensure_multimodal_model_loaded():
     global multimodal_model
     global symptom_feature_columns
     global condition_names
@@ -186,7 +186,8 @@ def ensure_image_model_loaded():
     checkpoint = torch.load(
         MULTIMODAL_MODEL_PATH,
         map_location="cpu",
-        weights_only=False
+        weights_only=True,
+        mmap=True
     )
 
     symptom_feature_columns = checkpoint[

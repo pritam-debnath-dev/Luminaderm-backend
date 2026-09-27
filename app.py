@@ -27,7 +27,7 @@ with open("class_names.json", "r") as f:
 
 model = None
 
-def ensure_image_model_loaded():
+def ensure_multimodal_model_loaded():
     global model
 
     if model is not None:
@@ -69,7 +69,7 @@ def home():
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     """Existing image-only endpoint."""
-    ensure_image_model_loaded()
+    ensure_multimodal_model_loaded()
     
     try:
         image_bytes = await file.read()
